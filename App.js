@@ -1,323 +1,333 @@
 import React from 'react';
-import { View, Text, StyleSheet, TextInput, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, ScrollView, TextInput, Image, TouchableOpacity } from 'react-native';
 
-const App = () => {
+export default function App() {
   return (
     <View style={styles.container}>
       {/* Banner Section */}
       <View style={styles.banner}>
-        {/* Status Bar */}
+        <Image 
+          style={styles.ellipse} 
+          source={require('./assets/banner-background.png')} 
+        />
         <View style={styles.statusBar}>
-          <Text style={styles.statusText}>9:41</Text>
-          <View style={styles.statusIcons}>
-            <Image style={styles.statusIcon} source={require('./assets/battery_icon.png')} />
+          <Text style={styles.timeText}>9:41</Text>
+          <View style={styles.locationIcon} />
+          <View style={styles.batteryContainer}>
+            <View style={styles.batteryLevel} />
             <Text style={styles.batteryText}>32</Text>
           </View>
         </View>
+      </View>
 
-        {/* Back Button */}
-        <TouchableOpacity style={styles.backButton}>
-          <Image style={styles.backIcon} source={require('./assets/back_icon.png')} />
-        </TouchableOpacity>
-
-        {/* Center Circle and Text */}
-        <View style={styles.circleContainer}>
-          <View style={styles.circle}>
-            <Image style={styles.calendarIcon} source={require('./assets/calendar_icon.png')} />
-            <Text style={styles.bannerTitle}>Bimbingan</Text>
-            <Text style={styles.bannerSubtitle}>Laporan Kerja Praktik</Text>
-          </View>
+      {/* User Info and Notification */}
+      <View style={styles.userInfoContainer}>
+        <View style={styles.userInfo}>
+          <Text style={styles.greetingText}>Selamat Pagi</Text>
+          <Text style={styles.userName}>Bryan Hanggara</Text>
+        </View>
+        <View style={styles.notificationIcon}>
+          <Image 
+            style={styles.notificationBell} 
+            source={{ uri: 'https://via.placeholder.com/22x17' }} 
+          />
         </View>
       </View>
 
-      {/* Details Section */}
-      <View style={styles.detailsContainer}>
-        {/* Duration and Frequency */}
-        <View style={styles.row}>
-          <View style={styles.detailBox}>
-            <Image style={styles.detailIcon} source={require('./assets/duration_icon.png')} />
-            <Text style={styles.detailText}>1 Bulan</Text>
-            <Text style={styles.detailLabel}>Durasi</Text>
-          </View>
-          <View style={styles.detailBox}>
-            <Image style={styles.detailIcon} source={require('./assets/frequency_icon.png')} />
-            <Text style={styles.detailText}>2 x Seminggu</Text>
-            <Text style={styles.detailLabel}>Frekuensi</Text>
-          </View>
-        </View>
-
-        {/* Category and Time */}
-        <View style={styles.row}>
-          <View style={styles.detailBox}>
-            <Image style={styles.detailIcon} source={require('./assets/category_icon.png')} />
-            <View style={styles.tags}>
-              <Text style={styles.tag}>#Bimbingan</Text>
-              <Text style={styles.tag}>#Laporan</Text>
-            </View>
-            <Text style={styles.detailLabel}>Kategori</Text>
-          </View>
-          <View style={styles.detailBox}>
-            <Image style={styles.detailIcon} source={require('./assets/time_icon.png')} />
-            <Text style={styles.detailText}>13:00 - 14:00</Text>
-            <Text style={styles.detailLabel}>Jam</Text>
-          </View>
-        </View>
-
-        {/* Location */}
-        <Text style={styles.sectionTitle}>Lokasi</Text>
-        <View style={styles.locationBox}>
-          <Image style={styles.locationIcon} source={require('./assets/location_icon.png')} />
-          <View>
-            <Text style={styles.locationText}>Gedung Diklat Fasilkom Bukit</Text>
-            <Text style={styles.locationSubtext}>Lantai 4, Ruangan Dosen</Text>
-          </View>
-        </View>
-
-        {/* Notes */}
-        <Text style={styles.sectionTitle}>Catatan</Text>
-        <View style={styles.notesBox}>
-          <TextInput style={styles.notesInput} placeholder="Tambah catatan disini..." placeholderTextColor="#8A8A8A" />
-        </View>
-
-        {/* Contact Section */}
-        <Text style={styles.sectionTitle}>Kontak Dosen</Text>
-        <View style={styles.contactRow}>
-          <TouchableOpacity style={styles.contactButton}>
-            <Image style={styles.contactIcon} source={require('./assets/whatsapp_icon.png')} />
-            <Text style={styles.contactText}>Whatsapp</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.contactButton}>
-            <Image style={styles.contactIcon} source={require('./assets/phone_icon.png')} />
-            <Text style={styles.contactText}>Telepon</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.contactButton}>
-            <Image style={styles.contactIcon} source={require('./assets/email_icon.png')} />
-            <Text style={styles.contactText}>Email</Text>
-          </TouchableOpacity>
-        </View>
+      {/* Faculty Information */}
+      <View style={styles.facultyContainer}>
+        <Text style={styles.facultyText}>
+          Fakultas Ilmu Komputer{'\n'}Jurusan Sistem Informasi
+        </Text>
       </View>
+
+      {/* Search Bar */}
+      <View style={styles.searchBar}>
+        <View style={styles.searchIcon}>
+          <View style={styles.searchVector} />
+        </View>
+        <TextInput 
+          placeholder="Apa yang kamu cari hari ini" 
+          style={styles.searchInput} 
+        />
+      </View>
+
+      {/* Feature Buttons */}
+      <View style={styles.featureContainer}>
+        <FeatureButton 
+          label="Administrasi" 
+          imageSource={require('./assets/administrasi.png')} 
+        />
+        <FeatureButton 
+          label="Progress" 
+          imageSource={require('./assets/progress.png')} 
+        />
+        <FeatureButton 
+          label="Pengingat" 
+          imageSource={require('./assets/pengingat.png')} 
+        />
+      </View>
+
+      {/* Announcements */}
+      <ScrollView style={styles.announcementContainer}>
+        <Text style={styles.sectionTitle}>Pengumuman</Text>
+        <AnnouncementCard 
+          title="Persetujuan Pembimbing Kerja Praktik" 
+          description="Berikut Adalah Hasil Pengumuman Pembimbing Kerja Praktik Yang Telah Disetujui Oleh Ketua Jurusan" 
+        />
+        <AnnouncementCard 
+          title="Pengumpulan Surat Permohonan Izin Kerja Praktik" 
+          description="Pengumpulan Surat Permohonan Izin Kerja Praktik Dimulai Dari Tanggal 1 Agustus 2024 - 31 Agustus 2024" 
+        />
+        <AnnouncementCard 
+          title="Surat Izin Kerja Praktik" 
+          description="Berikut Adalah Surat Izin Kerja Praktik Yang Telah Di Tanda Tangani Oleh Wakil Dekan Akademik" 
+        />
+      </ScrollView>
 
       {/* Bottom Navigation */}
       <View style={styles.bottomNavigation}>
-        <TouchableOpacity style={styles.navItem}>
-          <Text style={styles.navTextActive}>Beranda</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.navItem}>
-          <Text style={styles.navText}>Lainnya</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.navItem}>
-          <Text style={styles.navText}>Akademik</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.navItem}>
-          <Text style={styles.navText}>Pesan</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.navItem}>
-          <Text style={styles.navText}>Akun</Text>
-        </TouchableOpacity>
+        <BottomNavigationButton label="Beranda" isSelected={true} />
+        <BottomNavigationButton label="Lainnya" />
+        <BottomNavigationButton label="Akademik" />
+        <BottomNavigationButton label="Pesan" />
+        <BottomNavigationButton label="Akun" />
       </View>
     </View>
   );
-};
+}
+
+function FeatureButton({ label, imageSource }) {
+  return (
+    <TouchableOpacity style={styles.featureButton}>
+      <Image source={imageSource} style={styles.featureIcon} />
+      <Text style={styles.featureLabel}>{label}</Text>
+    </TouchableOpacity>
+  );
+}
+
+function AnnouncementCard({ title, description }) {
+  return (
+    <View style={styles.announcementCard}>
+      <Text style={styles.announcementTitle}>{title}</Text>
+      <Text style={styles.announcementDescription}>{description}</Text>
+      <TouchableOpacity style={styles.announcementButton}>
+        <Text style={styles.buttonText}>Klik Disini</Text>
+      </TouchableOpacity>
+    </View>
+  );
+}
+
+function BottomNavigationButton({ label, isSelected }) {
+  return (
+    <TouchableOpacity style={styles.bottomButton}>
+      <View style={isSelected ? styles.selectedIcon : styles.icon} />
+      <Text style={isSelected ? styles.selectedLabel : styles.label}>
+        {label}
+      </Text>
+    </TouchableOpacity>
+  );
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#f8f8f8',
   },
   banner: {
+    width: '100%',
+    height: 300,
     backgroundColor: '#3470A2',
-    height: 244,
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
-    position: 'relative',
-    padding: 20,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
   },
-  statusBar: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 10,
-  },
-  statusText: {
-    fontSize: 17,
-    color: '#fff',
-  },
-  statusIcons: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  statusIcon: {
-    width: 18,
-    height: 18,
-    marginRight: 5,
-  },
-  batteryText: {
-    fontSize: 11,
-    color: '#fff',
-  },
-  backButton: {
+  ellipse: {
+    width: 300,
+    height: 300,
     position: 'absolute',
-    top: 20,
-    left: 20,
-    backgroundColor: '#F7CE45',
-    width: 42,
-    height: 41,
-    borderRadius: 20,
+    top: 2,
+    left: 200,
+    resizeMode: 'cover',
+    opacity: 0.2, // Adjust opacity here
+  },  
+  statusBar: {
+    width: '100%',
+    height: 39,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  backIcon: {
-    width: 23,
-    height: 23,
-  },
-  circleContainer: {
-    alignItems: 'center',
-    marginTop: 20,
-  },
-  circle: {
-    width: 190,
-    height: 190,
-    backgroundColor: '#63ABE6',
-    borderRadius: 90,
-    justifyContent: 'center',
-    alignItems: 'center',
-    top: 1,
-  },
-  calendarIcon: {
-    width: 50,
-    height: 50,
-    marginBottom: 10,
-  },
-  bannerTitle: {
-    color: '#000',
-    fontSize: 20,
-    fontWeight: '700',
-  },
-  bannerSubtitle: {
-    color: '#8A8A8A',
-    fontSize: 16,
-    fontWeight: '400',
-  },
-  detailsContainer: {
-    padding: 20,
-  },
-  row: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 20,
-  },
-  detailBox: {
-    width: '48%',
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: '#273B4A',
-    padding: 15,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  detailIcon: {
-    width: 24,
-    height: 24,
-    marginBottom: 10,
-  },
-  detailText: {
-    fontSize: 14,
-    fontWeight: '500',
-    color: '#000',
-    marginBottom: 5,
-  },
-  detailLabel: {
-    fontSize: 12,
-    color: '#8A8A8A',
-  },
-  tags: {
     flexDirection: 'row',
   },
-  tag: {
-    backgroundColor: '#FFC727',
-    padding: 5,
-    borderRadius: 5,
-    fontSize: 10,
-    color: '#000',
-    marginRight: 5,
-  },
-  sectionTitle: {
-    fontSize: 20,
-    fontWeight: '700',
-    color: '#000',
-    marginBottom: 10,
-  },
-  locationBox: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 15,
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: '#D9D9D9',
-    marginBottom: 20,
+  timeText: {
+    color: 'white',
+    fontSize: 17,
+    fontWeight: 'bold',
   },
   locationIcon: {
-    width: 24,
-    height: 24,
-    marginRight: 15,
+    width: 14,
+    height: 14,
+    backgroundColor: 'white',
   },
-  locationText: {
-    fontSize: 16,
-    fontWeight: '700',
-    color: '#000',
+  batteryContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
-  locationSubtext: {
+  batteryLevel: {
+    width: 9.88,
+    height: 14,
+    backgroundColor: '#F7CE45',
+  },
+  batteryText: {
+    color: 'white',
+    fontSize: 11,
+    fontWeight: 'bold',
+  },
+  userInfoContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 20,
+    marginTop: -60,
+  },
+  userInfo: {
+    flexDirection: 'column',
+    marginTop: -90, // Move the text upwards by 10 pixels
+  },
+  
+  greetingText: {
+    color: 'white',
     fontSize: 12,
-    color: '#8A8A8A',
+    fontWeight: '700',
   },
-  notesBox: {
-    padding: 15,
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: '#D9D9D9',
-    marginBottom: 20,
+  userName: {
+    color: '#FFC727',
+    fontSize: 20,
+    fontWeight: '800',
   },
-  notesInput: {
+  notificationIcon: {
+    backgroundColor: 'white',
+    padding: 12,
+    borderRadius: 50,
+  },
+  notificationBell: {
+    width: 22.27,
+    height: 17.5,
+  },
+  facultyContainer: {
+    backgroundColor: 'rgba(255, 255, 255, 0.48)',
+    padding: 10, // Reduced padding to make it smaller
+    position: 'absolute',
+    top: 210, // Adjust this value to move it up or down
+    left: 30, // Added left margin to make it smaller
+    right: 0, // Added right margin to make it smaller
+    height: 60, // Set a fixed height to make the container smaller
+    width: 250, // Set a fixed width to control the size
+    borderRadius: 30, // Adjusted border radius to fit the smaller size
+    alignItems: 'center',
+  },
+  
+  
+  facultyText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: '600',
+    textAlign: 'center',
+  },
+  searchBar: {
+    flexDirection: 'row',
+    backgroundColor: 'white',
+    marginHorizontal: 20,
+    padding: 16,
+    borderRadius: 50,
+    marginVertical: 10,
+  },
+  searchIcon: {
+    width: 20,
+    height: 20,
+    backgroundColor: '#8A8A8A',
+    marginRight: 10,
+  },
+  searchInput: {
+    flex: 1,
     fontSize: 14,
     color: '#8A8A8A',
   },
-  contactRow: {
+  featureContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
+    marginVertical: 20,
   },
-  contactButton: {
+  featureButton: {
     alignItems: 'center',
   },
-  contactIcon: {
-    width: 24,
-    height: 24,
-    marginBottom: 5,
+  featureIcon: {
+    width: 40,
+    height: 40,
   },
-  contactText: {
+  featureLabel: {
+    marginTop: 5,
+    color: '#5F5F61',
+    fontSize: 14,
+    textAlign: 'center',
+  },
+  announcementContainer: {
+    paddingHorizontal: 20,
+  },
+  announcementCard: {
+    backgroundColor: '#fff',
+    padding: 15,
+    borderRadius: 7,
+    marginBottom: 10,
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+    elevation: 3,
+  },
+  announcementTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  announcementDescription: {
+    marginVertical: 5,
     fontSize: 12,
-    color: '#8A8A8A',
+    color: '#666',
+  },
+  announcementButton: {
+    backgroundColor: '#FFC727',
+    borderRadius: 5,
+    padding: 5,
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: '#fff',
+    fontWeight: 'bold',
   },
   bottomNavigation: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    paddingVertical: 15,
-    borderTopWidth: 1,
-    borderTopColor: '#D9D9D9',
+    backgroundColor: 'white',
+    padding: 10,
   },
-  navItem: {
+  bottomButton: {
     alignItems: 'center',
   },
-  navText: {
-    fontSize: 10,
-    color: '#8C8994',
+  selectedIcon: {
+    width: 24,
+    height: 24,
+    backgroundColor: '#FFC727',
   },
-  navTextActive: {
-    fontSize: 10,
+  icon: {
+    width: 24,
+    height: 24,
+    backgroundColor: '#8C8994',
+  },
+  selectedLabel: {
     color: '#FFC727',
+    fontSize: 10,
+    fontWeight: '500',
+  },
+  label: {
+    color: '#8C8994',
+    fontSize: 10,
+    fontWeight: '500',
   },
 });
 
-export default App;
