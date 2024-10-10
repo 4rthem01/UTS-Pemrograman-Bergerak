@@ -1,333 +1,326 @@
 import React from 'react';
-import { StyleSheet, View, Text, ScrollView, TextInput, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, TextInput, Image } from 'react-native';
 
-export default function App() {
+const App = () => {
   return (
     <View style={styles.container}>
       {/* Banner Section */}
       <View style={styles.banner}>
-        <Image 
-          style={styles.ellipse} 
-          source={require('./assets/banner-background.png')} 
-        />
+        <View style={styles.ellipse} />
+        {/* Status Bar */}
         <View style={styles.statusBar}>
-          <Text style={styles.timeText}>9:41</Text>
-          <View style={styles.locationIcon} />
-          <View style={styles.batteryContainer}>
-            <View style={styles.batteryLevel} />
-            <Text style={styles.batteryText}>32</Text>
+          <View style={styles.leftStatus}>
+            <Text style={styles.statusText}>9:41</Text>
+            <View style={styles.locationIndicator}></View>
+          </View>
+          <View style={styles.rightStatus}>
+            <View style={styles.networkSignal}></View>
+            <View style={styles.battery}>
+              <View style={styles.batteryFill}></View>
+              <Text style={styles.batteryText}>32</Text>
+            </View>
           </View>
         </View>
-      </View>
-
-      {/* User Info and Notification */}
-      <View style={styles.userInfoContainer}>
-        <View style={styles.userInfo}>
-          <Text style={styles.greetingText}>Selamat Pagi</Text>
-          <Text style={styles.userName}>Bryan Hanggara</Text>
+        {/* Profile Section */}
+        <View style={styles.profileContainer}>
+          <Text style={styles.welcomeText}>Selamat Datang Di Progress</Text>
+          <Text style={styles.username}>Bryan Hanggara</Text>
         </View>
-        <View style={styles.notificationIcon}>
-          <Image 
-            style={styles.notificationBell} 
-            source={{ uri: 'https://via.placeholder.com/22x17' }} 
-          />
+        {/* Search Box */}
+        <View style={styles.searchBox}>
+          <TextInput style={styles.searchInput} placeholder="Apa yang kamu cari hari ini" placeholderTextColor="#8A8A8A" />
+        </View>
+        {/* Notification Icon */}
+        <TouchableOpacity style={styles.notificationIcon}>
+          <View style={styles.doubleArrowLeft}></View>
+        </TouchableOpacity>
+      </View>
+
+      {/* Progress Section */}
+      <View style={styles.progressContainer}>
+        <Text style={styles.dearText}>Dear Bryan,</Text>
+        <Text style={styles.progressText}>Jangan Lupa Untuk Selalu Cek Progress Bimbingan Mu Ya</Text>
+        <View style={styles.progressBackground}>
+          <View style={styles.progressBar}></View>
+          <Text style={styles.emoji}>😄</Text>
         </View>
       </View>
 
-      {/* Faculty Information */}
-      <View style={styles.facultyContainer}>
-        <Text style={styles.facultyText}>
-          Fakultas Ilmu Komputer{'\n'}Jurusan Sistem Informasi
-        </Text>
-      </View>
+      {/* Task List */}
+      <ScrollView style={styles.taskList}>
+        <Text style={styles.sectionTitle}>Bimbingan Kerja Praktik</Text>
 
-      {/* Search Bar */}
-      <View style={styles.searchBar}>
-        <View style={styles.searchIcon}>
-          <View style={styles.searchVector} />
+        {/* Task 1 */}
+        <View style={styles.taskItem}>
+          <Text style={styles.taskText}>Bimbingan Topik Kerja Praktik</Text>
+          <Image style={styles.checkImage} source={require('./assets/check_icon.png')} />
         </View>
-        <TextInput 
-          placeholder="Apa yang kamu cari hari ini" 
-          style={styles.searchInput} 
-        />
-      </View>
 
-      {/* Feature Buttons */}
-      <View style={styles.featureContainer}>
-        <FeatureButton 
-          label="Administrasi" 
-          imageSource={require('./assets/administrasi.png')} 
-        />
-        <FeatureButton 
-          label="Progress" 
-          imageSource={require('./assets/progress.png')} 
-        />
-        <FeatureButton 
-          label="Pengingat" 
-          imageSource={require('./assets/pengingat.png')} 
-        />
-      </View>
+        {/* Task 2 */}
+        <View style={styles.taskItem}>
+          <Text style={styles.taskText}>Bimbingan Proposal Dan Tempat Kerja Praktik</Text>
+          <Image style={styles.checkImage} source={require('./assets/check_icon.png')} />
+        </View>
 
-      {/* Announcements */}
-      <ScrollView style={styles.announcementContainer}>
-        <Text style={styles.sectionTitle}>Pengumuman</Text>
-        <AnnouncementCard 
-          title="Persetujuan Pembimbing Kerja Praktik" 
-          description="Berikut Adalah Hasil Pengumuman Pembimbing Kerja Praktik Yang Telah Disetujui Oleh Ketua Jurusan" 
-        />
-        <AnnouncementCard 
-          title="Pengumpulan Surat Permohonan Izin Kerja Praktik" 
-          description="Pengumpulan Surat Permohonan Izin Kerja Praktik Dimulai Dari Tanggal 1 Agustus 2024 - 31 Agustus 2024" 
-        />
-        <AnnouncementCard 
-          title="Surat Izin Kerja Praktik" 
-          description="Berikut Adalah Surat Izin Kerja Praktik Yang Telah Di Tanda Tangani Oleh Wakil Dekan Akademik" 
-        />
+        {/* Task 3 */}
+        <View style={styles.taskItem}>
+          <Text style={styles.taskText}>Bimbingan Formulir Kegiatan</Text>
+          <Image style={styles.checkImage} source={require('./assets/check_icon.png')} />
+        </View>
+
+        {/* Task 4 */}
+        <View style={styles.taskItem}>
+          <Text style={styles.taskText}>Bimbingan Laporan Kerja Praktik</Text>
+        </View>
+
+        {/* Task 5 */}
+        <View style={styles.taskItem}>
+          <Text style={styles.taskText}>Bimbingan Revisi Laporan Kerja Praktik Akhir</Text>
+        </View>
       </ScrollView>
 
       {/* Bottom Navigation */}
       <View style={styles.bottomNavigation}>
-        <BottomNavigationButton label="Beranda" isSelected={true} />
-        <BottomNavigationButton label="Lainnya" />
-        <BottomNavigationButton label="Akademik" />
-        <BottomNavigationButton label="Pesan" />
-        <BottomNavigationButton label="Akun" />
+        <TouchableOpacity style={styles.navItem}>
+          <View style={styles.navIcon}></View>
+          <Text style={styles.navTextActive}>Beranda</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.navItem}>
+          <View style={styles.navIconInactive}></View>
+          <Text style={styles.navText}>Lainnya</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.navItem}>
+          <View style={styles.navIconInactive}></View>
+          <Text style={styles.navText}>Akademik</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.navItem}>
+          <View style={styles.navIconInactive}></View>
+          <Text style={styles.navText}>Pesan</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.navItem}>
+          <View style={styles.navIconInactive}></View>
+          <Text style={styles.navText}>Akun</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
-}
-
-function FeatureButton({ label, imageSource }) {
-  return (
-    <TouchableOpacity style={styles.featureButton}>
-      <Image source={imageSource} style={styles.featureIcon} />
-      <Text style={styles.featureLabel}>{label}</Text>
-    </TouchableOpacity>
-  );
-}
-
-function AnnouncementCard({ title, description }) {
-  return (
-    <View style={styles.announcementCard}>
-      <Text style={styles.announcementTitle}>{title}</Text>
-      <Text style={styles.announcementDescription}>{description}</Text>
-      <TouchableOpacity style={styles.announcementButton}>
-        <Text style={styles.buttonText}>Klik Disini</Text>
-      </TouchableOpacity>
-    </View>
-  );
-}
-
-function BottomNavigationButton({ label, isSelected }) {
-  return (
-    <TouchableOpacity style={styles.bottomButton}>
-      <View style={isSelected ? styles.selectedIcon : styles.icon} />
-      <Text style={isSelected ? styles.selectedLabel : styles.label}>
-        {label}
-      </Text>
-    </TouchableOpacity>
-  );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f8f8f8',
+    backgroundColor: '#fff',
   },
   banner: {
-    width: '100%',
-    height: 300,
     backgroundColor: '#3470A2',
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
+    height: 230,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+    position: 'relative',
+    padding: 20,
   },
   ellipse: {
-    width: 300,
-    height: 300,
+    width: 210, // Adjusted size for smaller circle
+    height: 210,
+    backgroundColor: '#63ABE6',
+    borderRadius: 9999,
     position: 'absolute',
-    top: 2,
-    left: 200,
-    resizeMode: 'cover',
-    opacity: 0.2, // Adjust opacity here
-  },  
+    top: 10,
+    right: -60, // Adjusted to move the circle closer
+  },
   statusBar: {
-    width: '100%',
-    height: 39,
-    justifyContent: 'center',
-    alignItems: 'center',
     flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    height: 39,
   },
-  timeText: {
-    color: 'white',
+  leftStatus: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  statusText: {
     fontSize: 17,
-    fontWeight: 'bold',
+    color: '#fff',
+    marginRight: 10,
   },
-  locationIcon: {
+  locationIndicator: {
     width: 14,
     height: 14,
-    backgroundColor: 'white',
+    backgroundColor: '#fff',
+    borderRadius: 7,
   },
-  batteryContainer: {
+  rightStatus: {
     flexDirection: 'row',
     alignItems: 'center',
   },
-  batteryLevel: {
-    width: 9.88,
+  networkSignal: {
+    width: 20,
+    height: 12,
+    backgroundColor: '#fff',
+    opacity: 0.5,
+    marginRight: 10,
+  },
+  battery: {
+    width: 27,
     height: 14,
+    backgroundColor: '#fff',
+    position: 'relative',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  batteryFill: {
+    width: 10,
+    height: '100%',
     backgroundColor: '#F7CE45',
   },
   batteryText: {
-    color: 'white',
-    fontSize: 11,
-    fontWeight: 'bold',
+    color: '#fff',
+    fontSize: 10,
+    fontWeight: '700',
+    position: 'absolute',
+    right: 5,
   },
-  userInfoContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingHorizontal: 20,
-    marginTop: -60,
+  profileContainer: {
+    marginTop: 20,
   },
-  userInfo: {
-    flexDirection: 'column',
-    marginTop: -90, // Move the text upwards by 10 pixels
-  },
-  
-  greetingText: {
-    color: 'white',
+  welcomeText: {
+    color: '#fff',
     fontSize: 12,
     fontWeight: '700',
   },
-  userName: {
+  username: {
     color: '#FFC727',
     fontSize: 20,
     fontWeight: '800',
   },
-  notificationIcon: {
-    backgroundColor: 'white',
-    padding: 12,
+  searchBox: {
+    backgroundColor: '#fff',
     borderRadius: 50,
-  },
-  notificationBell: {
-    width: 22.27,
-    height: 17.5,
-  },
-  facultyContainer: {
-    backgroundColor: 'rgba(255, 255, 255, 0.48)',
-    padding: 10, // Reduced padding to make it smaller
-    position: 'absolute',
-    top: 210, // Adjust this value to move it up or down
-    left: 30, // Added left margin to make it smaller
-    right: 0, // Added right margin to make it smaller
-    height: 60, // Set a fixed height to make the container smaller
-    width: 250, // Set a fixed width to control the size
-    borderRadius: 30, // Adjusted border radius to fit the smaller size
-    alignItems: 'center',
-  },
-  
-  
-  facultyText: {
-    color: 'white',
-    fontSize: 16,
-    fontWeight: '600',
-    textAlign: 'center',
-  },
-  searchBar: {
+    paddingHorizontal: 20,
+    paddingVertical: 15,
+    marginTop: 10,
     flexDirection: 'row',
-    backgroundColor: 'white',
-    marginHorizontal: 20,
-    padding: 16,
-    borderRadius: 50,
-    marginVertical: 10,
-  },
-  searchIcon: {
-    width: 20,
-    height: 20,
-    backgroundColor: '#8A8A8A',
-    marginRight: 10,
+    alignItems: 'center',
   },
   searchInput: {
     flex: 1,
-    fontSize: 14,
     color: '#8A8A8A',
+    fontSize: 14,
+    fontFamily: 'Outfit',
   },
-  featureContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    marginVertical: 20,
-  },
-  featureButton: {
-    alignItems: 'center',
-  },
-  featureIcon: {
+  notificationIcon: {
+    position: 'absolute',
+    top: 20,
+    left: 20,
+    backgroundColor: '#F7CE45',
     width: 40,
     height: 40,
-  },
-  featureLabel: {
-    marginTop: 5,
-    color: '#5F5F61',
-    fontSize: 14,
-    textAlign: 'center',
-  },
-  announcementContainer: {
-    paddingHorizontal: 20,
-  },
-  announcementCard: {
-    backgroundColor: '#fff',
-    padding: 15,
-    borderRadius: 7,
-    marginBottom: 10,
-    shadowColor: '#000',
-    shadowOpacity: 0.1,
-    shadowRadius: 5,
-    elevation: 3,
-  },
-  announcementTitle: {
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  announcementDescription: {
-    marginVertical: 5,
-    fontSize: 12,
-    color: '#666',
-  },
-  announcementButton: {
-    backgroundColor: '#FFC727',
-    borderRadius: 5,
-    padding: 5,
+    borderRadius: 20,
+    justifyContent: 'center',
     alignItems: 'center',
   },
-  buttonText: {
+  doubleArrowLeft: {
+    width: 10,
+    height: 20,
+    borderLeftWidth: 2,
+    borderBottomWidth: 2,
+    borderColor: '#3470A2',
+    transform: [{ rotate: '45deg' }],
+  },
+  progressContainer: {
+    marginHorizontal: 29,
+    marginTop: 10,
+    backgroundColor: '#63ABE6',
+    borderRadius: 30,
+    padding: 15,
+    elevation: 5,
+  },
+  dearText: {
     color: '#fff',
-    fontWeight: 'bold',
+    fontSize: 13,
+ 
+  },
+  progressText: {
+    color: '#fff',
+    fontSize: 7,
+    marginTop: 10,
+  },
+  progressBackground: {
+    height: 15,
+    backgroundColor: '#D9D9D9',
+    borderRadius: 15,
+    marginTop: 10,
+    position: 'relative',
+  },
+  progressBar: {
+    width: '60%', // This simulates the progress (adjust as necessary)
+    height: '100%',
+    backgroundColor: '#FFD358',
+    borderRadius: 15,
+  },
+  emoji: {
+    position: 'absolute',
+    right: 5, // Positioned at the end of the progress bar
+    top: -2, // Slightly elevated to fit in the progress bar
+    fontSize: 16,
+  },
+  taskList: {
+    flex: 1,
+    marginTop: 20,
+    paddingHorizontal: 30,
+  },
+  sectionTitle: {
+    fontSize: 20,
+    fontWeight: '600',
+    color: '#002649',
+    marginBottom: 15,
+  },
+  taskItem: {
+    backgroundColor: '#D9D9D9',
+    borderRadius: 10,
+    padding: 10,
+    marginBottom: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  taskText: {
+    fontSize: 12,
+    fontWeight: '700',
+    color: '#000',
+  },
+  checkImage: {
+    width: 18,
+    height: 18,
   },
   bottomNavigation: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    backgroundColor: 'white',
-    padding: 10,
+    paddingVertical: 15,
+    borderTopWidth: 1,
+    borderTopColor: '#D9D9D9',
   },
-  bottomButton: {
+  navItem: {
     alignItems: 'center',
   },
-  selectedIcon: {
+  navIcon: {
     width: 24,
     height: 24,
     backgroundColor: '#FFC727',
   },
-  icon: {
+  navIconInactive: {
     width: 24,
     height: 24,
     backgroundColor: '#8C8994',
   },
-  selectedLabel: {
-    color: '#FFC727',
+  navText: {
     fontSize: 10,
-    fontWeight: '500',
-  },
-  label: {
     color: '#8C8994',
+  },
+  navTextActive: {
     fontSize: 10,
-    fontWeight: '500',
+    color: '#FFC727',
   },
 });
 
+export default App;
