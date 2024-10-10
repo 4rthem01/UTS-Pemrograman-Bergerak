@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "UTS",
-    "slug": "UTS",
+    "name": "progress",
+    "slug": "progress",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
